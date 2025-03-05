@@ -6,13 +6,14 @@ import EventItem from './EventItem.jsx';
 import { fetchEvents } from '../../util/http.js';
 export default function NewEventsSection() {
 
-  const {data,error,isLoading,isError} = useQuery({
+  const {data,error,isPending,isError} = useQuery({
     queryKey:['events'],
-    queryFn:fetchEvents 
+    queryFn:fetchEvents,
+    staleTime:5000,
   })
   let content;
 
-  if (isLoading) {
+  if (isPending) {
     content = <LoadingIndicator />;
   }
 
