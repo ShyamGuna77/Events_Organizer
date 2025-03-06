@@ -48,7 +48,11 @@ export default function EventDetails() {
 
   let content = <p>Please enter a search term to find events.</p>;
   if (isPending) {
-    content = <LoadingIndicator />;
+    content = (
+      <div className="center">
+        <LoadingIndicator />;
+      </div>
+    );
   }
 
   if (isError) {
