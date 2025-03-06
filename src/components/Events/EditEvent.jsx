@@ -24,15 +24,19 @@ export default function EditEvent() {
       const previousEvent = queryClient.getQueryData(["events",params.id])
 
      queryClient.setQueryData(['events',params.id],newEvent)
+     return {previousEvent}
     },
     onError: (error,data,context)=>{
-
+       queryClient.setQueryData(['events',params.id],context.previousEvent)
+    },
+    onSettled : () => {
+      queryClient.invalidateQueries(['events',params.id])
     }
   })
 
   function handleSubmit(formData) {
     mutate({id:params.id,event:formData})
-    navigate("../")
+    navigate("/events")
   }
 
   function handleClose() {
